@@ -2312,62 +2312,23 @@ boot();
 
  
  
-
  
-<!-- ══════════════════════════════════════════════════
-     PASTE THIS BLOCK INTO ANY PAGE YOU WANT THE POPUP
-     ══════════════════════════════════════════════════ -->
- 
-<!-- Overlay + Modal -->
-<div id="support-overlay" onclick="handleOverlayClick(event)">
-  <div id="support-modal">
-    <button id="support-close" onclick="closeSupport()" title="Close">✕</button>
-    <!--
-      Replace the src below with YOUR GitHub Pages URL once deployed.
-      Example: https://yourusername.github.io/support/
-    -->
-    <iframe
-      id="support-frame"
-      src=""
-      title="Support ArtechFuz3D"
-      loading="lazy">
-    </iframe>
-  </div>
-</div>
- 
+<!-- BLOCK 3: Script — paste once before </body> -->
 <script>
-  // ── Change this to your deployed GitHub Pages URL ──
-  var SUPPORT_PAGE_URL = "https://artechfuz3d.github.io/support/";
-  // ───────────────────────────────────────────────────
- 
-  function openSupport() {
-    var frame = document.getElementById("support-frame");
-    // Lazy-load: only set src when first opened
-    if (!frame.src || frame.src === window.location.href) {
-      frame.src = SUPPORT_PAGE_URL;
-    }
-    document.getElementById("support-overlay").classList.add("open");
-    document.body.style.overflow = "hidden";
+  function openSupportWidget() {
+    var f = document.getElementById('afz-frame');
+    if (!f.src) f.src = 'https://artechfuz3d.github.io/support/';
+    var o = document.getElementById('afz-overlay');
+    o.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
- 
-  function closeSupport() {
-    document.getElementById("support-overlay").classList.remove("open");
-    document.body.style.overflow = "";
+  function closeSupportWidget() {
+    document.getElementById('afz-overlay').style.display = 'none';
+    document.body.style.overflow = '';
   }
- 
-  // Close on backdrop click (not on the modal itself)
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById("support-overlay")) {
-      closeSupport();
-    }
-  }
- 
-  // Close on Escape key
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") closeSupport();
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSupportWidget();
   });
 </script>
- 
-<!-- ═══════════════ END OF PASTE BLOCK ═══════════════ -->
 </body>
 </html>
