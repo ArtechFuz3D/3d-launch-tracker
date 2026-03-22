@@ -1,3 +1,3 @@
-# 3d-launch-tracker
+# 3D Launch Tracker
 
-[](3DLaunchTracker.png)
+![3d-launch-tracker](3DLaunchTracker.png)
