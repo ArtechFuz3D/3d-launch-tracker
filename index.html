@@ -2296,5 +2296,134 @@ async function boot(){
 }
 boot();
 </script>
+   /* ════════════════════════════════════
+     SUPPORT WIDGET — copy everything below
+     this comment into your own site
+     ════════════════════════════════════ */
+ 
+  /* 1. Overlay backdrop */
+  #support-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(4px);
+    z-index: 99998;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  #support-overlay.open { display: flex; }
+ 
+  /* 2. Modal iframe wrapper */
+  #support-modal {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    height: min(520px, 90vh);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+ 
+  #support-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+ 
+  /* 3. Close button */
+  #support-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+  }
+  #support-close:hover { background: rgba(255,76,41,0.5); }
+ 
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+</style>
+</head>
+<body>
+ 
+<h2>Embed Demo</h2>
+<p>This button can live anywhere on your site. It pops open the support page in a modal.</p>
+ 
+<!-- Your trigger button — style however you like -->
+<button id="support-btn" onclick="openSupport()">💸 Support / Donate</button>
+ 
+<!-- ══════════════════════════════════════════════════
+     PASTE THIS BLOCK INTO ANY PAGE YOU WANT THE POPUP
+     ══════════════════════════════════════════════════ -->
+ 
+<!-- Overlay + Modal -->
+<div id="support-overlay" onclick="handleOverlayClick(event)">
+  <div id="support-modal">
+    <button id="support-close" onclick="closeSupport()" title="Close">✕</button>
+    <!--
+      Replace the src below with YOUR GitHub Pages URL once deployed.
+      Example: https://yourusername.github.io/support/
+    -->
+    <iframe
+      id="support-frame"
+      src=""
+      title="Support ArtechFuz3D"
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+ 
+<script>
+  // ── Change this to your deployed GitHub Pages URL ──
+  var SUPPORT_PAGE_URL = "https://yourusername.github.io/support/";
+  // ───────────────────────────────────────────────────
+ 
+  function openSupport() {
+    var frame = document.getElementById("support-frame");
+    // Lazy-load: only set src when first opened
+    if (!frame.src || frame.src === window.location.href) {
+      frame.src = SUPPORT_PAGE_URL;
+    }
+    document.getElementById("support-overlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+ 
+  function closeSupport() {
+    document.getElementById("support-overlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+ 
+  // Close on backdrop click (not on the modal itself)
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById("support-overlay")) {
+      closeSupport();
+    }
+  }
+ 
+  // Close on Escape key
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") closeSupport();
+  });
+</script>
+ 
+<!-- ═══════════════ END OF PASTE BLOCK ═══════════════ -->
 </body>
 </html>
